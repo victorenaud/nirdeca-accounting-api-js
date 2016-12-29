@@ -1,0 +1,19 @@
+{
+  "name": "nirdeca-accounting",
+  "version": "1.0.0",
+  "description": "App to do my finances",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Acedrin/nirdeca-accounting.git"
+  },
+  "author": "Victor Enaud",
+  "license": "GNU GPLv3",
+  "bugs": {
+    "url": "https://github.com/Acedrin/nirdeca-counting/issues"
+  },
+  "homepage": "https://github.com/Acedrin/nirdeca-counting#readme"
+}
