@@ -4,6 +4,7 @@
   "description": "App to do my finances",
   "main": "index.js",
   "scripts": {
+    "start": "node bin/start",
     "test": "mocha test"
   },
   "repository": {
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/Acedrin/nirdeca-counting/issues"
   },
-  "homepage": "https://github.com/Acedrin/nirdeca-counting#readme"
+  "homepage": "https://github.com/Acedrin/nirdeca-counting#readme",
+  "dependencies": {
+    "hapi": "^16.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "supertest": "^2.0.1"
+  }
 }
