@@ -4,17 +4,19 @@ const {
 } = require('../')
 
 describe('index.js', () => {
-    describe('GET /', () => {
-        let server
-        const pjson = require('../package.json')
+    let server
 
-        beforeEach(() => {
-            server = createServer()
-            return server.start()
-        })
-        afterEach(() => {
-            return server.stop()
-        })
+    beforeEach(() => {
+        server = createServer()
+        return server.start()
+    })
+
+    afterEach(() => {
+        return server.stop()
+    })
+
+    describe('GET /', () => {
+        const pjson = require('../package.json')
 
         it('should replies hello Nirdeca when called', () => {
             return supertest(server.listener)
@@ -24,6 +26,17 @@ describe('index.js', () => {
                     description: pjson.description,
                     version: pjson.version
                 })
+        })
+    })
+
+    describe('GET /users', () => {
+        const users = require('../data/users.json')
+
+        it('should give all users', () => {
+            return supertest(server.listener)
+                .get('/users')
+                .expect(200)
+                .expect(users)
         })
     })
 })
