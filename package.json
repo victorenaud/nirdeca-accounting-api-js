@@ -1,7 +1,7 @@
 {
-  "name": "nirdeca-accounting",
-  "version": "1.0.0",
-  "description": "App to do my finances",
+  "name": "nirdeca-accounting-api",
+  "version": "0.0.1",
+  "description": "Nirdeca-accounting API",
   "main": "index.js",
   "scripts": {
     "start": "node bin/start",
