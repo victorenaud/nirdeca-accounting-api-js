@@ -33,6 +33,19 @@ function createServer(options) {
         }
     })
 
+    server.route({
+        method: 'GET',
+        path: '/users/{id}',
+        config: {
+            description: 'Give the the details of an user',
+            tags: ['api', 'users']
+        },
+        handler(request, reply) {
+            id = request.params.id
+            reply(users.users[id - 1])
+        }
+    })
+
     return server
 }
 
