@@ -1,20 +1,29 @@
 const supertest = require('supertest')
-const {createServer} = require('../')
+const {
+    createServer
+} = require('../')
 
-describe('GET /', () => {
-    let server
-    beforeEach(() => {
-        server = createServer()
-        return server.start()
-    })
-    afterEach(() => {
-        return server.stop()
-    })
+describe('index.js', () => {
+    describe('GET /', () => {
+        let server
+        const pjson = require('../package.json')
 
-    it('should replies hello Nirdeca when called', () => {
-        return supertest(server.listener)
-            .get('/')
-            .expect(200)
-            .expect('Hello Nirdeca!')
+        beforeEach(() => {
+            server = createServer()
+            return server.start()
+        })
+        afterEach(() => {
+            return server.stop()
+        })
+
+        it('should replies hello Nirdeca when called', () => {
+            return supertest(server.listener)
+                .get('/')
+                .expect(200)
+                .expect({
+                    description: pjson.description,
+                    version: pjson.version
+                })
+        })
     })
 })
