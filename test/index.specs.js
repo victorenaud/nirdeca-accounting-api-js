@@ -11,9 +11,7 @@ describe('GET /', () => {
         return server.stop()
     })
 
-
-
-    it('replies hello Nirdeca', () => {
+    it('should replies hello Nirdeca when called', () => {
         return supertest(server.listener)
             .get('/')
             .expect(200)
