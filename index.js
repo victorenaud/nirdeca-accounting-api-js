@@ -4,6 +4,7 @@ function createServer(options) {
     const server = new Hapi.Server()
     const pjson = require('./package.json')
     const users = require('./data/users.json')
+    const database  = require('./database.js');
 
     server.connection(options)
     server.route({
@@ -29,7 +30,8 @@ function createServer(options) {
             tags: ['api', 'users']
         },
         handler(request, reply) {
-            reply(users)
+            var knew_users = database.select().table('users');
+            reply(knew_users)
         }
     })
 
