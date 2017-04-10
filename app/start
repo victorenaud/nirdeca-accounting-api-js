@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+const { createServer } = require('../index');
+
+const server = createServer({ port: process.env.PORT || 3000 });
+
+server.start().then(() => {
+  console.log('server started at', server.info.uri);
+}).catch((reason) => {
+  console.error(reason.stack);
+  process.exit(1);
+});

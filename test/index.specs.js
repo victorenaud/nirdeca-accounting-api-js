@@ -1,22 +1,22 @@
-const supertest = require('supertest')
+const supertest = require('supertest');
 const {
     createServer
-} = require('../')
+} = require('../index.js');
 
-describe('index.js', () => {
-    let server
+describe('index', () => {
+    let server;
 
     beforeEach(() => {
-        server = createServer()
+        server = createServer();
         return server.start()
-    })
+    });
 
     afterEach(() => {
         return server.stop()
-    })
+    });
 
     describe('GET /', () => {
-        const pjson = require('../package.json')
+        const pjson = require('../package.json');
 
         it('should replies hello Nirdeca when called', () => {
             // When
@@ -30,10 +30,10 @@ describe('index.js', () => {
                     version: pjson.version
                 })
         })
-    })
+    });
 
     describe('GET /users', () => {
-        const users = require('../data/users.json')
+        const users = require('./users.json');
 
         it('should give all users when called', () => {
             // When
@@ -43,7 +43,7 @@ describe('index.js', () => {
                 // Then
                 .expect(200)
                 .expect(users)
-        })
+        });
 
         it('should give the details of user asked when called with id', () => {
 
@@ -54,6 +54,6 @@ describe('index.js', () => {
                 // Then
                 .expect(200)
                 .expect(users.users[0])
-        })
-    })
-})
+        });
+    });
+});
