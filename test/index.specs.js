@@ -1,42 +1,33 @@
-const supertest = require('supertest')
-const {
-    createServer
-} = require('../')
+const index = require('../index.js');
+const Chai = require('chai');
+const expect = Chai.expect;
 
-describe('index.js', () => {
-    let server
+describe('index', () => {
+    let server;
 
     beforeEach(() => {
-        server = createServer()
-        return server.start()
-    })
-
-    afterEach(() => {
-        return server.stop()
-    })
+        server = index.createServer();
+    });
 
     describe('GET /', () => {
-        const pjson = require('../package.json')
+        const pjson = require('../package.json');
+        const requestDefaults = {
+            method: 'GET',
+            url: '/',
+        };
 
-        it('should replies hello Nirdeca when called', () => {
-            return supertest(server.listener)
-                .get('/')
-                .expect(200)
-                .expect({
-                    description: pjson.description,
-                    version: pjson.version
-                })
+        it('should reply with API informations a when called', () => {
+            // Given
+            const request = Object.assign({}, requestDefaults);
+
+            // When
+            return server.inject(request)
+            // Then
+                .then(response => {
+                    expect(response.statusCode).to.equal(200);
+                    expect(response.result.description).to.equal(pjson.description);
+                    expect(response.result.version).to.equal(pjson.version);
+                });
         })
-    })
-
-    describe('GET /users', () => {
-        const users = require('../data/users.json')
-
-        it('should give all users', () => {
-            return supertest(server.listener)
-                .get('/users')
-                .expect(200)
-                .expect(users)
-        })
-    })
-})
+    });
+});

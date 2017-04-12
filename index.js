@@ -1,11 +1,10 @@
-const Hapi = require('hapi')
+const Hapi = require('hapi');
+const pjson = require('./package.json');
 
 function createServer(options) {
-    const server = new Hapi.Server()
-    const pjson = require('./package.json')
-    const users = require('./data/users.json')
+    const server = new Hapi.Server();
 
-    server.connection(options)
+    server.connection(options);
     server.route({
         method: 'GET',
         path: '/',
@@ -19,21 +18,11 @@ function createServer(options) {
                 version: pjson.version
             })
         }
-    })
+    });
 
-    server.route({
-        method: 'GET',
-        path: '/users',
-        config: {
-            description: 'Give the list of all users',
-            tags: ['api', 'users']
-        },
-        handler(request, reply) {
-            reply(users)
-        }
-    })
+    server.route(require('./app/users/usersRoute.js'));
 
-    return server
+    return server;
 }
 
-exports.createServer = createServer
+exports.createServer = createServer;
