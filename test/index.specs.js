@@ -1,59 +1,33 @@
-const supertest = require('supertest');
-const {
-    createServer
-} = require('../index.js');
+const index = require('../index.js');
+const Chai = require('chai');
+const expect = Chai.expect;
 
 describe('index', () => {
     let server;
 
     beforeEach(() => {
-        server = createServer();
-        return server.start()
-    });
-
-    afterEach(() => {
-        return server.stop()
+        server = index.createServer();
     });
 
     describe('GET /', () => {
         const pjson = require('../package.json');
+        const requestDefaults = {
+            method: 'GET',
+            url: '/',
+        };
 
-        it('should replies hello Nirdeca when called', () => {
-            // When
-            return supertest(server.listener)
-                .get('/')
-
-                // Then
-                .expect(200)
-                .expect({
-                    description: pjson.description,
-                    version: pjson.version
-                })
-        })
-    });
-
-    describe('GET /users', () => {
-        const users = require('./users.json');
-
-        it('should give all users when called', () => {
-            // When
-            return supertest(server.listener)
-                .get('/users')
-
-                // Then
-                .expect(200)
-                .expect(users)
-        });
-
-        it('should give the details of user asked when called with id', () => {
-
+        it('should reply with API informations a when called', () => {
             // Given
-            return supertest(server.listener)
-                .get('/users/1')
+            const request = Object.assign({}, requestDefaults);
 
-                // Then
-                .expect(200)
-                .expect(users.users[0])
-        });
+            // When
+            return server.inject(request)
+            // Then
+                .then(response => {
+                    expect(response.statusCode).to.equal(200);
+                    expect(response.result.description).to.equal(pjson.description);
+                    expect(response.result.version).to.equal(pjson.version);
+                });
+        })
     });
 });

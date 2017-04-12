@@ -1,9 +1,9 @@
 const Hapi = require('hapi');
 const pjson = require('./package.json');
-const server = new Hapi.Server();
-
 
 function createServer(options) {
+    const server = new Hapi.Server();
+
     server.connection(options);
     server.route({
         method: 'GET',
