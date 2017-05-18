@@ -4,7 +4,7 @@
   "description": "Nirdeca-accounting API",
   "main": "index.js",
   "scripts": {
-    "start": "node app/start",
+    "start": "node server/infrastructure/server.js",
     "test": "mocha --recursive"
   },
   "repository": {
