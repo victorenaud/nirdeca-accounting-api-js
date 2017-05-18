@@ -1,4 +1,4 @@
-const index = require('../index.js');
+const index = require('../server/infrastructure/server.js');
 const Chai = require('chai');
 const expect = Chai.expect;
 
