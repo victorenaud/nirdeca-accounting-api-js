@@ -5,7 +5,10 @@ module.exports = {
             filename: "./data/database.sqlite"
         },
         seeds: {
-            directory: "./data/seeds"
+            directory: "../../../data/seeds"
+        },
+        migrations: {
+            directory: "../../../data/migrations"
         }
     }
 };
