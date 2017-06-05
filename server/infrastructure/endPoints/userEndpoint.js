@@ -1,4 +1,4 @@
-const userService = require('../use_cases/index').userService;
+const userUseCases = require('../../use_cases/index').userUseCases;
 
 
 
@@ -24,7 +24,7 @@ const routes = [
 ];
 
 function getUsers(request, reply) {
-    userService.getUsers()
+    userUseCases.getUsers()
         .then(function (users) {
             reply(users);
         })
@@ -37,7 +37,7 @@ function getUsers(request, reply) {
 function getUser(request, reply) {
     const id = request.params.id;
 
-    userService.getUser(id)
+    userUseCases.getUser(id)
         .then(function (user) {
             reply(user);
         })
