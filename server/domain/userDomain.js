@@ -6,7 +6,12 @@ function getUser(userRepository, id) {
     return userRepository.getUser(id);
 }
 
+function addUser(userRepository, user) {
+    return userRepository.addUser(user);
+}
+
 module.exports = {
     getUsers: getUsers,
-    getUser: getUser
+    getUser: getUser,
+    addUser : addUser
 };

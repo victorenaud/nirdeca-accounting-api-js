@@ -1,7 +1,6 @@
 const userUseCases = require('../../use_cases/index').userUseCases;
 
 
-
 const routes = [
     {
         method: 'GET',
@@ -20,7 +19,17 @@ const routes = [
             tags: ['api', 'users']
         },
         handler: getUser
-    }
+    },
+    {
+        method: 'POST',
+        path: '/users/add',
+        config: {
+            description: 'Add the given user',
+            tags: ['api', 'users']
+        },
+        handler: addUser
+    },
+
 ];
 
 function getUsers(request, reply) {
@@ -40,6 +49,18 @@ function getUser(request, reply) {
     userUseCases.getUser(id)
         .then(function (user) {
             reply(user);
+        })
+        .catch(function (error) {
+            console.log(error);
+            reply({'message': error.toString()}).code(500);
+        });
+}
+
+function addUser(request, reply) {
+    const user = request.query;
+    userUseCases.addUser(user.name, user.last_name, user.email)
+        .then(function (resp) {
+            reply(resp);
         })
         .catch(function (error) {
             console.log(error);

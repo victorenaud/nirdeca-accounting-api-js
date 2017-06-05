@@ -20,7 +20,14 @@ function getUsers() {
         });
 }
 
+function addUser(user) {
+    return knex('users')
+        .insert(user)
+        .returning('id');
+}
+
 module.exports = {
     getUser: getUser,
-    getUsers: getUsers
+    getUsers: getUsers,
+    addUser: addUser
 };

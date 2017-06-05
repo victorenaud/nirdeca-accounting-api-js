@@ -8,7 +8,7 @@ describe('userDomain', () => {
     let userRepositoryStub = sinon.stub(userRepository);
 
     describe('getUsers', () => {
-        it('should call getUsers method of userRepository', function () {
+        it('should call getUsers method of userRepository', () => {
             // When
             userDomain.getUsers(userRepositoryStub);
 
@@ -17,8 +17,8 @@ describe('userDomain', () => {
         });
     });
 
-    describe('getUsers', () => {
-        it('should call getUsers method of userRepository', function () {
+    describe('getUser', () => {
+        it('should call getUser method of userRepository with given id', () => {
             // Given
             let id = '1';
 
@@ -28,6 +28,24 @@ describe('userDomain', () => {
             // Then
             expect(userRepositoryStub.getUser.calledOnce).to.be.true;
             expect(userRepositoryStub.getUser.calledWithExactly(id)).to.be.true;
+        });
+    });
+
+    describe('addUser', () => {
+        it('should call addUser method of userRepository with given details', () => {
+            // Given
+            let user = {
+                name: 'John',
+                lastName: 'Doe',
+                email: 'john.doe@example.org'
+            };
+
+            // When
+            userDomain.addUser(userRepositoryStub, user);
+
+            // Then
+            expect(userRepositoryStub.addUser.calledOnce).to.be.true;
+            expect(userRepositoryStub.addUser.calledWithExactly(user)).to.be.true;
         });
     });
 });
